@@ -1,17 +1,18 @@
 {
-    "compilerOptions": {
-      "target": "ES6",
-      "module": "CommonJS",
-      "noImplicitAny": true,
-      "removeComments": true,
-      "preserveConstEnums": true,
-      "sourceMap": true,
-      "declaration": false,
-    },
-    "files": [
-      "src/index.ts",
-    ],
-    "exclude": [
-      "node_modules",
-    ]
-  }
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "declaration": false,
+  },
+  "include": [
+    "src/**/*.ts",
+    "views/**/*.tsx", "views/src/App.ts", "views/src/index.ts",
+  ],
+  "exclude": [
+    "node_modules",
+  ]
+}

@@ -5,11 +5,13 @@
 In a more technical perspective, we are are using the following technologies:<br>
 * Node.js - Using to write source code.
 * Typescript - Using to ensure type-safe code.
-* PostgreSQL - Using to manage data.
+* SQlite - Using to manage data.
 * Express - Using to provide the local web server.
 * Jest - Using to test, mock and do test coverage of the solution.
 * Pkg - Using to package our solution into a Windows executable.
 * Bootstrap 5 - Using to build the solution's responsive web pages.
+* React
+* Sequelize
 
 *So if you're new to the project, just run `npm install`*
 

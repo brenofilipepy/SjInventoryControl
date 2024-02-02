@@ -4,10 +4,12 @@
   "description": "Inventory Control for the Santos Jewelery Store",
   "main": "index.ts",
   "scripts": {
-    "start": "cd views && npm start",
+    "start": "ts-node src\\presentation\\routes.ts && cd views && npm start",
     "test": "jest",
     "pkg-solution-dev": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\dev\\LocalWebAppDev --debug",
-    "pkg-solution-prod": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\prod\\LocalWebApp"
+    "pkg-solution-prod": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\prod\\LocalWebApp",
+    "express-server": "ts-node src\\presentation\\routes.ts",
+    "react-server": "cd views && npm start"
   },
   "repository": {
     "type": "git",
@@ -16,13 +18,18 @@
   "author": "brenofilipepy",
   "license": "ISC",
   "devDependencies": {
+    "@types/express": "^4.17.21",
     "@types/jest": "^29.5.11",
+    "@types/node": "^20.11.16",
     "express": "^4.18.2",
     "jest": "^29.7.0",
     "pkg": "^5.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "sequelize": "^6.35.2",
+    "sqlite3": "^5.1.7",
     "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }

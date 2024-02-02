@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
+import LoginPage from './components/Login.tsx'
 
 export default function App(): ReactNode {
   return (
-    <h1>Hello World</h1>
+    <LoginPage/>
   );
 }

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "target": "es2020",
     "module": "commonjs",
     "noImplicitAny": true,
@@ -7,6 +8,8 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "declaration": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
   },
   "include": [
     "src/**/*.ts",

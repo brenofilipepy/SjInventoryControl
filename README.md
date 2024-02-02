@@ -25,6 +25,6 @@ This project is following the layered architecture, that can be understood by re
 
 ## *Future implementations*
 
-* It would be interesting to have a wizard for installation, updating and repairing the software, since we are also dealing with a local database.
+* It would be interesting to have a wizard for installation, updating and repairing the software, since we are also dealing with a local database. Or I could use some bootstrap script to install it by its own.
 
 * It would be great if we could containerize our solution into a Docker container, even if we just used it for development purposes.

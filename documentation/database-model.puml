@@ -1,0 +1,59 @@
+@startuml
+entity Client {
+    * id
+    * name
+    * type
+    * cpf
+    * cnpj
+    * address
+    * email
+    * phone
+    * addDate
+    * updateDate
+    * status
+    * activityLog
+}
+
+entity User {
+    * id
+    * name
+    * email
+    * password
+    * role
+    * permissions
+    * addDate
+    * updateDate
+    * status
+    * activityLog
+}
+
+entity Product {
+    * id
+    * name
+    * code
+    * category
+    * quantity
+    * price
+    * cost
+    * addDate
+    * updateDate
+    * supplier
+    * description
+    * measure
+}
+
+entity Supplier {
+    * id
+    * name
+    * address
+    * contact
+    * email
+    * phone
+    * addDate
+    * updateDate
+}
+
+' Um produto pode ter varios fornecedores, e um fornecedor pode fornecer varios produtos
+' Um Cliente pode comprar varios Produtos, e um produto pode ser comprado por varios clientes
+
+@enduml

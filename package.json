@@ -9,7 +9,8 @@
     "pkg-solution-dev": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\dev\\LocalWebAppDev --debug",
     "pkg-solution-prod": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\prod\\LocalWebApp",
     "start-express-server": "ts-node src\\presentation\\routes.ts",
-    "start-react-server": "cd views && npm start"
+    "start-react-server": "cd views && npm start",
+    "test-db-conn": "npx ts-node src\\database\\databaseConnection.ts"
   },
   "repository": {
     "type": "git",

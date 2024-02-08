@@ -1,0 +1,14 @@
+{
+    "id": 1,
+    "name": "John Doe",
+    "type": "Pessoa Física",
+    "cpf": "000.000.000-00",
+    "cnpj": null,
+    "address": ["Rua Tovaquinha", "766", "Vila Industrial", "Arapongas", "PR"],
+    "email": "john@example.com",
+    "phone": "(00)00000-0000",
+    "addDate": "1707273155",
+    "updateDate": "1707273180",
+    "status": "active",
+    "activityLog": ["logged-in", "logged-out"]    
+}

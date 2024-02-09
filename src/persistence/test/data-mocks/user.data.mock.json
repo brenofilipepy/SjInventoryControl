@@ -1,0 +1,12 @@
+{
+    "id": 3,
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "hashed_password",
+    "role": "admin",
+    "permissions": "['read', 'write']",
+    "addDate": "2024-02-07",
+    "updateDate": "2024-02-07",
+    "status": "active",
+    "activityLog": "['Logged in', 'Viewed dashboard', 'Updated profile']" 
+}

@@ -1,0 +1,14 @@
+{
+    "id": 2,
+    "name": "Product Name",
+    "code": "P123",
+    "category": "Electronics",
+    "quantity": "10 units",
+    "price": 29.99,
+    "cost": 19.99,
+    "addDate": "2024-02-07",
+    "updateDate": "2024-02-07",
+    "supplier": "Supplier Company",
+    "description": "This is a description of the product.",
+    "measure": "Each"
+}  

@@ -10,10 +10,12 @@
     "declaration": false,
     "noEmit": true,
     "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
   },
   "include": [
     "src/**/*.ts",
-    "views/**/*.tsx", "views/src/App.ts", "views/src/index.ts",
+    "views/**/*.tsx", "views/src/App.ts", "views/src/index.ts", "src/persistence/test/mocks/client.mock.ts", "src/persistence/test/models/client.model.test.ts"
   ],
   "exclude": [
     "node_modules",

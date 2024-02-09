@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     // Lógica de autenticação
     console.log('Usuário:', username, 'Senha:', password);
+  };
+
+  const handleSignUp = () => {
+    navigate('/cadastro'); // Navega para a página de cadastro
   };
 
   return (
@@ -37,7 +43,7 @@ const LoginPage = () => {
               <center>
                 <div class="d-flex justify-content-between mb-3">
                   <button type="button" class="btn btn-primary flex-fill me-2">Entrar</button>
-                  <button type="button" class="btn btn-warning flex-fill">Cadastrar-se</button>
+                  <button onClick={handleSignUp} type="button" class="btn btn-warning flex-fill">Cadastrar-se</button>
                 </div>
               </center>
             </form>

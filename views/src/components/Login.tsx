@@ -11,19 +11,39 @@ const LoginPage = () => {
   };
 
   return (
-    <div class="login-container">
-    <h2 class="text-center">Login</h2>
-    <form class="login-form">
-      <div class="mb-3">
-        <label for="username" class="form-label">Usuário</label>
-        <input type="text" class="form-control" id="username" placeholder="Digite seu usuário"/>
+    <div class="container-fluid bg-success">
+      <div class="container d-flex align-items-center justify-content-center" style={{height: 100 + "vh"}}>
+        <div class="card w-50 h-50">
+          <div class="card-body">
+            <form class="login-form">
+              <center>
+                <h2 class="display-6">Controle de Estoque</h2>
+                <h2 class="display-6">Santos Jewelry</h2>
+              </center>
+              <br/>
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">@</span>
+                  <input type="type" class="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1"/>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon1">**</span>
+                  <input type="password" class="form-control" placeholder="Senha" aria-label="Senha" aria-describedby="basic-addon1"/>
+                </div>
+              </div>
+              <br/><br/>
+              <center>
+                <div class="d-flex justify-content-between mb-3">
+                  <button type="button" class="btn btn-primary flex-fill me-2">Entrar</button>
+                  <button type="button" class="btn btn-warning flex-fill">Cadastrar-se</button>
+                </div>
+              </center>
+            </form>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Senha</label>
-        <input type="password" class="form-control" id="password" placeholder="Digite sua senha"/>
-      </div>
-      <button type="submit" class="btn btn-primary">Entrar</button>
-    </form>
     </div>
   );
 };

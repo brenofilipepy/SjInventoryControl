@@ -1,20 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import sqliteConnection from '../../database/databaseConnection.ts';
 
-class ClientModel extends Model {
-    id: number;
-    name: string;
-    type: string;
-    cpf: string;
-    cnpj: string;
-    address: string[];
-    email: string;
-    phone: string;
-    addDate: string;
-    updateDate: string;
-    status: string;
-    activityLog: string[];
-};
+class ClientModel extends Model {};
 
 ClientModel.init({
     id: {
@@ -30,12 +17,14 @@ ClientModel.init({
     },
     cpf: {
         type: DataTypes.STRING,
+        allowNull: true,
     },
     cnpj: {
         type: DataTypes.STRING,
+        allowNull: true,
     },
     address: {
-        type: DataTypes.ARRAY(DataTypes.STRING),
+        type: DataTypes.STRING, // TODO: Ideally address should be a domain table
     },
     email: {
         type: DataTypes.STRING,
@@ -44,21 +33,22 @@ ClientModel.init({
         type: DataTypes.STRING,
     },
     addDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
     },
     updateDate: {
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
     },
     status: {
         type: DataTypes.STRING,
     },
     activityLog: {
-        type: DataTypes.ARRAY(DataTypes.STRING)
+        type: DataTypes.STRING, // TODO: Ideally activityLog should be an array
     }
 },
 {
     sequelize: sqliteConnection,
-    modelName: 'Client'
+    modelName: 'Client',
+    tableName: 'Client',
 });
-  
+
 export default ClientModel;

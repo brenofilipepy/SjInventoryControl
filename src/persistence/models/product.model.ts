@@ -1,20 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import sqliteConnection from '../../database/databaseConnection.ts';
 
-class ProductModel extends Model {
-    id: number;
-    name: string;
-    code: string;
-    category: string;
-    quantity: string;
-    price: number;
-    cost: number;
-    addDate: string;
-    updateDate: string;
-    supplier: string;
-    description: string;
-    measure: string;
-};
+class ProductModel extends Model {};
 
 ProductModel.init({
     id: {
@@ -58,7 +45,8 @@ ProductModel.init({
 }, 
 {
     sequelize: sqliteConnection,
-    modelName: 'Product'
+    modelName: 'Product',
+    tableName: 'Product',
 });
   
 export default ProductModel;

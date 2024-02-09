@@ -1,9 +1,8 @@
 import IRepository from "./iRepository";
 import UserModel from "../models/user.model";
-import UserDTO from "../dtos/user.dto";
 
 class UserRepository implements IRepository {
-    public async create(userData: UserDTO): Promise<any> {
+    public async create(userData: any | string): Promise<any> {
         return await UserModel.create({userData});
     }
 
@@ -15,7 +14,7 @@ class UserRepository implements IRepository {
         return await UserModel.findByPk(userId);
     }
 
-    public async update(userId: number, userData: any): Promise<any | null> {
+    public async update(userId: number, userData: any | string): Promise<any | null> {
         const user = await UserModel.findByPk(userId);
         if (user) {
             user.update(userData);

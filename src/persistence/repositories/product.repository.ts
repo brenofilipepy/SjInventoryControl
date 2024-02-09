@@ -1,9 +1,8 @@
 import IRepository from "./iRepository";
 import ProductModel from "../models/product.model";
-import ProductDTO from "../dtos/product.dto";
 
 class ProductRepository implements IRepository {
-    public async create(productData: ProductDTO): Promise<any> {
+    public async create(productData: any | string): Promise<any> {
         return await ProductModel.create({productData});
     }
 
@@ -15,7 +14,7 @@ class ProductRepository implements IRepository {
         return await ProductModel.findByPk(productId);
     }
 
-    public async update(productId: number, productData: any): Promise<any | null> {
+    public async update(productId: number, productData: any | string): Promise<any | null> {
         const product = await ProductModel.findByPk(productId);
         if (product) {
             product.update(productData);

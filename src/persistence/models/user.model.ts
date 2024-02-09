@@ -1,18 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import sqliteConnection from '../../database/databaseConnection.ts';
 
-class UserModel extends Model {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  role: string;
-  permissions: string[];
-  addDate: string;
-  updateDate: string;
-  status: string;
-  activityLog: string[];
-};
+class UserModel extends Model {};
 
 UserModel.init({
   id: {
@@ -35,7 +24,7 @@ UserModel.init({
     type: DataTypes.STRING,
   },
   permissions: {
-    type: DataTypes.ARRAY(DataTypes.STRING)
+    type: DataTypes.STRING, // TODO: Ideally permissions should be a domain table
   },
   addDate: {
     type: DataTypes.DATE
@@ -47,12 +36,13 @@ UserModel.init({
     type: DataTypes.STRING
   },
   activityLog: {
-    type: DataTypes.ARRAY(DataTypes.STRING)
+    type: DataTypes.STRING // TODO: Ideally activityLog should be an array
   }
 },
 {
   sequelize: sqliteConnection,
-  modelName: 'Product'
+  modelName: 'Product',
+  tableName: 'Product'
 });
 
 export default UserModel;

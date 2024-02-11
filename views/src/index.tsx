@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginPage from './components/Login.tsx';
-import SignUpPage from './components/Signup.tsx';
-import HomePage from './components/Home.tsx'
+import LoginPage from './pages/Login.tsx';
+import SignUpPage from './pages/Signup.tsx';
+import HomePage from './pages/Home.tsx'
 
 ReactDOM.render(
   <React.StrictMode>

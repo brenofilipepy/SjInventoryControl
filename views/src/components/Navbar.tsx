@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const navigate = useNavigate();
-
     const logout = () => {
         navigate('/login');
     }

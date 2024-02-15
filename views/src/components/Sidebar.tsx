@@ -18,7 +18,7 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
     }
 
     const home = () => {
-        setSelectedItem("list-clients-item");
+        setSelectedItem("");
         navigate('/');
     }
 

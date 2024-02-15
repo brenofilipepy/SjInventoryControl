@@ -8,11 +8,12 @@ import NavBar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import ProductTableGenerator from '../components/ProductTableGenerator.tsx';
 import ClientTableGenerator from '../components/ClientTableGenerator.tsx';
+import UserModal from '../components/UserModal.tsx';
 import SjLogo from '../public/img/public/SJLogo.png';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [selectedItem, setSelectedItem] = useState("");
+  const [selectedItem, setSelectedItem] = useState("");  
 
   const home = () => {
     navigate('/');
@@ -231,7 +232,6 @@ const HomePage = () => {
         <NavBar/>
         <main className="content">
           {/* conteudo */}
-
           {selectedItem === "list-products-item" && <ProductTableGenerator data={products} />}
           {selectedItem === "list-clients-item" && <ClientTableGenerator data={clients} />}
         </main>

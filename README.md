@@ -1,5 +1,5 @@
 # SjInventoryControl - Santos Jewelry Inventory Control
-    This is a basic inventory solution for a Jewelry store, which provides functions for the store like: view, modify, delete and organize products.
+    This is a basic inventory control solution for a Jewelry store, which provides functions for the store like: view, modify, delete and organize products.
 
 ## *Tech talk*
 In a more technical perspective, we are are using the following technologies:<br>

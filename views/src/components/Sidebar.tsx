@@ -13,8 +13,12 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
         setSelectedItem("list-products-item");
     }
 
+    const listClients = () => {
+        setSelectedItem("list-clients-item");
+    }
+
     const home = () => {
-        setSelectedItem("");
+        setSelectedItem("list-clients-item");
         navigate('/');
     }
 
@@ -44,8 +48,8 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
                         Clientes
                     </li>
 
-                    <li className="sidebar-item">
-                        <a className="sidebar-link" href="ui-buttons.html">
+                    <li className={`sidebar-item ${selectedItem === "list-clients-item" ? "active" : ""}`}>
+                        <a className="sidebar-link" onClick={listClients}>
                             <i className="align-middle" data-feather="square"></i> <span className="align-middle">Listar</span>
                         </a>
                     </li>

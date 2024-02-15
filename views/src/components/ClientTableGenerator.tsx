@@ -2,22 +2,26 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-interface Product {
+interface Client {
     id: number;
-    nome: string;
-    tipo: string;
-    material: string;
-    pedra: string | null;
-    preco: number;
+    name: string;
+    type: string;
+    cpf: string;
+    cnpj: string;
+    address: string;
+    email: string;
+    phone: string;
+    status: string;
+    activityLog: string;
 };
 
 interface TableProps {
-    data: Product[];
+    data: Client[];
 }
 
-//TODO: Implement paging
-const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
-    const [jsonData, setJsonData] = useState<Product[]>(data);
+// TODO: Implement paging
+const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
+    const [jsonData, setJsonData] = useState<Client[]>(data);
     const [searchInputArray, setSearchInputArray] = useState([]);
     const [sortByPriceAsc, setSortByPriceAsc] = useState<boolean>(true);
     const [sortByNameAsc, setSortByNameAsc] = useState<boolean>(true);
@@ -30,15 +34,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
     const orderByName = () => {
         setSortByNameAsc(!sortByNameAsc);
         const sortedData = [...jsonData].sort((a, b) =>
-            sortByNameAsc ? a.nome.localeCompare(b.nome) : b.nome.localeCompare(a.nome)
-        );
-        setJsonData(sortedData);
-    };
-
-    const orderByPrice = () => {
-        setSortByPriceAsc(!sortByPriceAsc);
-        const sortedData = [...jsonData].sort((a, b) =>
-            sortByPriceAsc ? b.preco - a.preco : a.preco - b.preco
+            sortByNameAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
         );
         setJsonData(sortedData);
     };
@@ -60,27 +56,25 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
     const renderTable = jsonData.map(product =>
         <tr key={product.id}>
             <td>{product.id}</td>
-            <td>{product.nome}</td>
-            <td>{product.tipo}</td>
-            <td>{product.material}</td>
-            <td>{product.pedra || '-'}</td>
-            <td>{product.preco.toFixed(2)}</td>
+            <td>{product.name}</td>
+            <td>{product.phone}</td>
+            <td>{product.email}</td>
+            <td>{product.status == 'Ativo' ? <span className="text-success">{product.status}</span> : <span className="text-danger">{product.status}</span>}</td>
         </tr>
     );
 
     const renderSearchTable = () => {
         const inputString = searchInputArray.join("").toLowerCase();
-        const filteredData = jsonData.filter((item) => item.nome.toLowerCase().includes(inputString));
+        const filteredData = jsonData.filter((item) => item.name.toLowerCase().includes(inputString));
         return (
             <React.Fragment>
                 {filteredData.map(searchedProduct => (
                     <tr key={searchedProduct.id}>
                         <td>{searchedProduct.id}</td>
-                        <td>{searchedProduct.nome}</td>
-                        <td>{searchedProduct.tipo}</td>
-                        <td>{searchedProduct.material}</td>
-                        <td>{searchedProduct.pedra || '-'}</td>
-                        <td>{searchedProduct.preco.toFixed(2)}</td>
+                        <td>{searchedProduct.name}</td>
+                        <td>{searchedProduct.phone}</td>
+                        <td>{searchedProduct.email}</td>
+                        <td>{searchedProduct.status == 'Ativo' ? <span className="text-success">{searchedProduct.status}</span> : <span className="text-danger">{searchedProduct.status}</span>}</td>
                     </tr>
                 ))}
             </React.Fragment>
@@ -104,10 +98,9 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                     <tr>
                         <th>ID</th>
                         <th>Nome <a href="#" onClick={orderByName}><i className="bi bi-arrow-down-up"></i></a></th>
-                        <th>Tipo</th>
-                        <th>Material</th>
-                        <th>Pedra</th>
-                        <th>Preço <a href="#" onClick={orderByPrice}><i className="bi bi-arrow-down-up"></i></a></th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,4 +116,4 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
 
 };
 
-export default ProductTableGenerator;
+export default ClientTableGenerator;

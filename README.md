@@ -24,9 +24,3 @@ We have development, testing, acceptance and production executables which can be
 This project is following the layered architecture, that can be understood by reading the `src` directory. The image below illustrates how a layered architecture works, if you're not used to it already:
 
 ![layered-architecture-illustration](https://miro.medium.com/v2/resize:fit:828/format:webp/1*TEt1-6-rSSg2rSX7so8nOg.png)
-
-## *Future implementations*
-
-* It would be interesting to have a wizard for installation, updating and repairing the software, since we are also dealing with a local database. Or I could use some bootstrap script to install it by its own.
-
-* It would be great if we could containerize our solution into a Docker container, even if we just used it for development purposes.

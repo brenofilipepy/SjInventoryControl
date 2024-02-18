@@ -41,6 +41,24 @@ ProductModel.init({
     },
     measure: {
         type: DataTypes.STRING
+    },
+    eanCode: {
+        type: DataTypes.STRING
+    },
+    skuCode: {
+        type: DataTypes.STRING
+    },
+    weight: {
+        type: DataTypes.STRING
+    },
+    orderDate: {
+        type: DataTypes.DATE,
+    },
+    sendDate: {
+        type: DataTypes.DATE,
+    },
+    deliverydate: {
+        type: DataTypes.DATE,
     }
 }, 
 {

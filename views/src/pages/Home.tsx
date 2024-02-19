@@ -9,6 +9,7 @@ import Footer from '../components/Footer.tsx';
 import ProductTableGenerator from '../components/ProductTableGenerator.tsx';
 import ClientTableGenerator from '../components/ClientTableGenerator.tsx';
 import UserModal from '../components/UserModal.tsx';
+import RegisterProductForm from '../components/registerProductForm.tsx';
 import SjLogo from '../public/img/public/SJLogo.png';
 
 const HomePage = () => {
@@ -234,6 +235,7 @@ const HomePage = () => {
           {/* conteudo */}
           {selectedItem === "list-products-item" && <ProductTableGenerator data={products} />}
           {selectedItem === "list-clients-item" && <ClientTableGenerator data={clients} />}
+          {selectedItem === "register-products-item" && <RegisterProductForm />}
         </main>
         <Footer/>
       </div>

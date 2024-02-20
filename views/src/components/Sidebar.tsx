@@ -13,6 +13,10 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
         setSelectedItem("list-products-item");
     }
 
+    const registerProducts = () => {
+        setSelectedItem("register-products-item");
+    }
+
     const listClients = () => {
         setSelectedItem("list-clients-item");
     }
@@ -41,6 +45,12 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
                     <li className={`sidebar-item ${selectedItem === "list-products-item" ? "active" : ""}`}>
                         <a className="sidebar-link" onClick={listProducts}>
                             <i className="align-middle" data-feather="sliders"></i> <span className="align-middle">Listar</span>
+                        </a>
+                    </li>
+
+                    <li className={`sidebar-item ${selectedItem === "register-products-item" ? "active" : ""}`}>
+                        <a className="sidebar-link" onClick={registerProducts}>
+                            <i className="align-middle" data-feather="sliders"></i> <span className="align-middle">Registrar</span>
                         </a>
                     </li>
 

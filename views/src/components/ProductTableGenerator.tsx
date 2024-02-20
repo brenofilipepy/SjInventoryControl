@@ -64,7 +64,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
             <td>{product.tipo}</td>
             <td>{product.material}</td>
             <td>{product.pedra || '-'}</td>
-            <td>{product.preco.toFixed(2)}</td>
+            <td>R${product.preco.toFixed(2).replace('.', ',')}</td>
         </tr>
     );
 
@@ -80,7 +80,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{searchedProduct.tipo}</td>
                         <td>{searchedProduct.material}</td>
                         <td>{searchedProduct.pedra || '-'}</td>
-                        <td>{searchedProduct.preco.toFixed(2)}</td>
+                        <td>R${searchedProduct.preco.toFixed(2).replace('.', ',')}</td>
                     </tr>
                 ))}
             </React.Fragment>
@@ -94,8 +94,8 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                     id='search-input'
                     type="text" 
                     className="form-control w-25" 
-                    placeholder="Filtrar por nome" 
-                    aria-label="Filtrar por nome" 
+                    placeholder="Buscar Produto" 
+                    aria-label="Buscar Produto" 
                     aria-describedby="basic-addon1"
                     onKeyDown={searchContent}/>
             </div>

@@ -87,6 +87,23 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
         );
     }
 
+    const calculatePaging = (): number => {
+        const totalItems: number = Object.keys(jsonData).length; 
+        return Math.ceil(totalItems / 10);
+    }
+
+    const paging = (
+        <nav aria-label="Page navigation example">
+            <ul className="pagination pagination-sm">
+                <li className="page-item"><a className="page-link" href="#">Anterior</a></li>
+                {Array.from({ length: calculatePaging() }, (_, index) => (
+                <li className="page-item"><a className="page-link" href="#">{index + 1}</a></li>
+                ))}
+                <li className="page-item"><a className="page-link" href="#">Próximo</a></li>
+            </ul>
+        </nav>
+    )
+
     return (
         <div>
             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -99,7 +116,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                     aria-describedby="basic-addon1"
                     onKeyDown={searchContent}/>
             </div>
-            <table className="table">
+            <table className="table table-sm" style={{borderCollapse: 'separate', borderSpacing: 6 + "px"}}>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -118,6 +135,9 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
 
                 </tbody>
             </table>
+            <footer>
+                {paging}
+            </footer>
         </div>
     );
 

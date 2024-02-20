@@ -21,6 +21,10 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
         setSelectedItem("list-clients-item");
     }
 
+    const registerClients = () => {
+        setSelectedItem("register-clients-item");
+    }
+
     const home = () => {
         setSelectedItem("");
         navigate('/');
@@ -61,6 +65,12 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
                     <li className={`sidebar-item ${selectedItem === "list-clients-item" ? "active" : ""}`}>
                         <a className="sidebar-link" onClick={listClients}>
                             <i className="align-middle" data-feather="square"></i> <span className="align-middle">Listar</span>
+                        </a>
+                    </li>
+
+                    <li className={`sidebar-item ${selectedItem === "register-clients-item" ? "active" : ""}`}>
+                        <a className="sidebar-link" onClick={registerClients}>
+                            <i className="align-middle" data-feather="square"></i> <span className="align-middle">Registrar</span>
                         </a>
                     </li>
                 </ul>

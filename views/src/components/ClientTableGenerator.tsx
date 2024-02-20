@@ -55,6 +55,18 @@ const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
         }
     }
 
+    const operations = (
+        <>
+            <a>
+                <i className="bi bi-pencil-square text-info"/>
+            </a>
+            &nbsp;&nbsp;
+            <a>
+                <i className="bi bi-trash-fill text-danger"/>
+            </a>
+        </>
+    );
+
     const renderTable = (tableIndex?: number) => {
         if (tableIndex < 0 || tableIndex >= jsonData.length) {
             throw new Error('Table Index out of range');
@@ -70,6 +82,7 @@ const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{client.phone}</td>
                         <td>{client.email}</td>
                         <td>{client.status == 'Ativo' ? <span className="text-success">{client.status}</span> : <span className="text-danger">{client.status}</span>}</td>
+                        <td>{operations}</td>
                     </tr>
                 ))
             )
@@ -83,6 +96,7 @@ const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{client.phone}</td>
                         <td>{client.email}</td>
                         <td>{client.status == 'Ativo' ? <span className="text-success">{client.status}</span> : <span className="text-danger">{client.status}</span>}</td>
+                        <td>{operations}</td>
                     </tr>
                 ))
             )
@@ -121,6 +135,7 @@ const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{searchedClient.phone}</td>
                         <td>{searchedClient.email}</td>
                         <td>{searchedClient.status == 'Ativo' ? <span className="text-success">{searchedClient.status}</span> : <span className="text-danger">{searchedClient.status}</span>}</td>
+                        <td>{operations}</td>
                 </tr>
                 ))}
             </React.Fragment>
@@ -167,6 +182,7 @@ const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <th>Telefone</th>
                         <th>Email</th>
                         <th>Status</th>
+                        <th>Operações</th>
                     </tr>
                 </thead>
                 <tbody>

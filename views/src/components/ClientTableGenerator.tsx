@@ -23,7 +23,6 @@ interface TableProps {
 const ClientTableGenerator: React.FC<TableProps> = ({ data }) => {
     const [jsonData, setJsonData] = useState<Client[]>(data);
     const [searchInputArray, setSearchInputArray] = useState([]);
-    const [sortByPriceAsc, setSortByPriceAsc] = useState<boolean>(true);
     const [sortByNameAsc, setSortByNameAsc] = useState<boolean>(true);
 
 

@@ -1,4 +1,5 @@
 const products = [
+  [
     {
       "id": 1,
       "nome": "Brinco de Ouro",
@@ -79,6 +80,49 @@ const products = [
       "pedra": "Ametista",
       "preco": 700.00
     },
+  ],
+  [
+    {
+      "id": 11,
+      "nome": "Anel de Diamante Encantado",
+      "tipo": "Clássico",
+      "material": "Ouro Branco",
+      "pedra": "Diamante",
+      "preco": 5000.00
+    },
+    {
+      "id": 12,
+      "nome": "Pulseira de Prata Encantadora",
+      "tipo": "Elegante",
+      "material": "Prata",
+      "pedra": "Safira",
+      "preco": 1200.00
+    },
+    {
+      "id": 13,
+      "nome": "Colar de Pérola Exclusivo",
+      "tipo": "Chique",
+      "material": "Ouro Amarelo",
+      "pedra": "Pérola",
+      "preco": 2500.00
+    },
+    {
+      "id": 14,
+      "nome": "Brinco de Ouro Romântico",
+      "tipo": "Delicado",
+      "material": "Ouro Rosé",
+      "pedra": "Rubi",
+      "preco": 1800.00
+    },
+    {
+      "id": 15,
+      "nome": "Conjunto de Jóias de Diamante Luxuoso",
+      "tipo": "Extravagante",
+      "material": "Ouro Amarelo",
+      "pedra": "Diamante",
+      "preco": 8000.00
+    },
+  ]
 ];
 
 export default products;

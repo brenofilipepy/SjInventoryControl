@@ -42,6 +42,7 @@ const RegisterProductForm = () => {
             </div>
 
             <div className="col-md-4">
+                {/* so pode aceitar ate 13 digitos numericos */}
                 <label for="eanCode" className="form-label">Código EAN</label>
                 <input type="text" className="form-control mb-3" id="eanCode"/>
 

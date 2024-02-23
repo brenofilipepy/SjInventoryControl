@@ -30,7 +30,7 @@ const RegisterClientForm = () => {
     )
     return (
         <div>
-            <RegisterDefaultForm formName={"Registrar Produto"}>
+            <RegisterDefaultForm formName={"Registrar Cliente"}>
                 {registerForm}
             </RegisterDefaultForm>
         </div>

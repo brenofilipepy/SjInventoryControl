@@ -15,13 +15,12 @@ interface TableProps {
     data: Product[];
 }
 
-//TODO: Implement paging
 const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
     const [jsonData, setJsonData] = useState<Product[]>(data);
     const [searchInputArray, setSearchInputArray] = useState([]);
+    const [currentIndex, setIndex] = useState(0);
     const [sortByPriceAsc, setSortByPriceAsc] = useState<boolean>(true);
     const [sortByNameAsc, setSortByNameAsc] = useState<boolean>(true);
-
 
     useEffect(() => {
         setJsonData(data);
@@ -29,18 +28,24 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
 
     const orderByName = () => {
         setSortByNameAsc(!sortByNameAsc);
-        const sortedData = [...jsonData].sort((a, b) =>
+
+        const table = Object.values(jsonData[currentIndex]) as Product[];
+        const sortedData = table.sort((a, b) =>
             sortByNameAsc ? a.nome.localeCompare(b.nome) : b.nome.localeCompare(a.nome)
         );
-        setJsonData(sortedData);
+
+        jsonData[currentIndex] = sortedData;
     };
 
     const orderByPrice = () => {
         setSortByPriceAsc(!sortByPriceAsc);
-        const sortedData = [...jsonData].sort((a, b) =>
+
+        const table = Object.values(jsonData[currentIndex]) as Product[];
+        const sortedData = table.sort((a, b) =>
             sortByPriceAsc ? b.preco - a.preco : a.preco - b.preco
         );
-        setJsonData(sortedData);
+        
+        jsonData[currentIndex] = sortedData;
     };
 
     const addCharacter = (character: string): string[] => {
@@ -53,24 +58,69 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
         if (inputChar.length === 1 && inputChar.match(/[a-z]/i) || inputChar === " ") {
             addCharacter(inputChar);
         } else if (inputChar === "Backspace") {
-            setSearchInputArray(prevArray => prevArray.slice(0, -1)); // Remove o último caractere
+            setSearchInputArray(prevArray => prevArray.slice(0, -1));
         }
     }
 
-    const renderTable = jsonData.map(product =>
-        <tr key={product.id}>
-            <td>{product.id}</td>
-            <td>{product.nome}</td>
-            <td>{product.tipo}</td>
-            <td>{product.material}</td>
-            <td>{product.pedra || '-'}</td>
-            <td>R${product.preco.toFixed(2).replace('.', ',')}</td>
-        </tr>
-    );
+    const renderTable = (tableIndex?: number) => {
+        if (tableIndex < 0 || tableIndex >= jsonData.length) {
+            throw new Error('Table Index out of range');
+        }
+
+        if (currentIndex !== 0) {
+            const table = Object.values(jsonData[currentIndex]);
+            return (
+                table.map(product => (
+                    <tr key={product.id}>
+                        <td>{product.id}</td>
+                        <td>{product.nome}</td>
+                        <td>{product.tipo}</td>
+                        <td>{product.material}</td>
+                        <td>{product.pedra || '-'}</td>
+                        <td>R${product.preco.toFixed(2).replace('.', ',')}</td>
+                    </tr>
+                ))
+            )
+        } else {
+            const table = Object.values(jsonData[0]);
+            return (
+                table.map(product => (
+                    <tr key={product.id}>
+                        <td>{product.id}</td>
+                        <td>{product.nome}</td>
+                        <td>{product.tipo}</td>
+                        <td>{product.material}</td>
+                        <td>{product.pedra || '-'}</td>
+                        <td>R${product.preco.toFixed(2).replace('.', ',')}</td>
+                    </tr>
+                ))
+            )
+        }
+    }
+
+    const handlePagingIndex = (tableIndex: number) => {
+        setIndex(tableIndex);
+    }
+
+    const advancePagingIndex = () => {
+        if (currentIndex > calculatePaging()) {
+            alert('Impossible to advance paging, final page reached!');
+            return;
+        }
+        setIndex(currentIndex + 1);
+    }
+
+    const retreatPagingIndex = () => {
+        if (currentIndex < 0) {
+            alert('Impossible to retreat paging, first page reached!');
+            return;
+        }
+        setIndex(currentIndex - 1);
+    }
 
     const renderSearchTable = () => {
         const inputString = searchInputArray.join("").toLowerCase();
-        const filteredData = jsonData.filter((item) => item.nome.toLowerCase().includes(inputString));
+        const filteredData = Object.values(jsonData[currentIndex]).filter((item) => item.nome.toLowerCase().includes(inputString));
         return (
             <React.Fragment>
                 {filteredData.map(searchedProduct => (
@@ -87,9 +137,28 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
         );
     }
 
+    const calculatePaging = (): number => {
+        return jsonData.length;
+    }
+
+    const paging = (
+        <nav aria-label="Page navigation example">
+            <ul className="pagination pagination-sm">
+                <li className="page-item"><a className="page-link" href="#" onClick={retreatPagingIndex}>Anterior</a></li>
+                {Array.from({ length: calculatePaging() }, (_, index) => (
+                    <li className={`page-item ${index === currentIndex ? 'active' : ''}`} key={index}>
+                        <a className="page-link" href="#" onClick={() => handlePagingIndex(index)}>{index + 1}</a>
+                    </li>
+                ))}
+                <li className="page-item"><a className="page-link" href="#" onClick={advancePagingIndex}>Próximo</a></li>
+            </ul>
+        </nav>
+    )
+
     return (
         <div>
-            <div className="d-flex justify-content-between align-items-center mb-3">
+            <div className="d-flex justify-content-between align-items-center mb-3 row-md-5">
+            <h4>Lista de Produtos</h4>
                 <input 
                     id='search-input'
                     type="text" 
@@ -99,7 +168,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                     aria-describedby="basic-addon1"
                     onKeyDown={searchContent}/>
             </div>
-            <table className="table">
+            <table className="table table-sm" style={{borderCollapse: 'separate', borderSpacing: 6 + "px"}}>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -112,12 +181,15 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                 </thead>
                 <tbody>
                     {searchInputArray.length <=0
-                    ? renderTable
+                    ? renderTable()
                     : renderSearchTable()
-                }
+                    }
 
                 </tbody>
             </table>
+            <footer>
+                {paging}
+            </footer>
         </div>
     );
 

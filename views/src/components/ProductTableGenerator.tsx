@@ -62,6 +62,18 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
         }
     }
 
+    const operations = (
+        <>
+            <a>
+                <i className="bi bi-pencil-square text-info"/>
+            </a>
+            &nbsp;&nbsp;
+            <a>
+                <i className="bi bi-trash-fill text-danger"/>
+            </a>
+        </>
+    );
+
     const renderTable = (tableIndex?: number) => {
         if (tableIndex < 0 || tableIndex >= jsonData.length) {
             throw new Error('Table Index out of range');
@@ -78,6 +90,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{product.material}</td>
                         <td>{product.pedra || '-'}</td>
                         <td>R${product.preco.toFixed(2).replace('.', ',')}</td>
+                        <td>{operations}</td>
                     </tr>
                 ))
             )
@@ -92,6 +105,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{product.material}</td>
                         <td>{product.pedra || '-'}</td>
                         <td>R${product.preco.toFixed(2).replace('.', ',')}</td>
+                        <td>{operations}</td>
                     </tr>
                 ))
             )
@@ -131,6 +145,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <td>{searchedProduct.material}</td>
                         <td>{searchedProduct.pedra || '-'}</td>
                         <td>R${searchedProduct.preco.toFixed(2).replace('.', ',')}</td>
+                        <td>{operations}</td>
                     </tr>
                 ))}
             </React.Fragment>
@@ -177,6 +192,7 @@ const ProductTableGenerator: React.FC<TableProps> = ({ data }) => {
                         <th>Material</th>
                         <th>Pedra</th>
                         <th>Preço <a href="#" onClick={orderByPrice}><i className="bi bi-arrow-down-up"></i></a></th>
+                        <th>Operações</th>
                     </tr>
                 </thead>
                 <tbody>

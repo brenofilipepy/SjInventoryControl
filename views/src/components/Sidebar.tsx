@@ -26,7 +26,7 @@ const SideBar = ({ selectedItem, setSelectedItem }: { selectedItem: string, setS
     }
 
     const home = () => {
-        setSelectedItem("");
+        setSelectedItem("home");
         navigate('/');
     }
 

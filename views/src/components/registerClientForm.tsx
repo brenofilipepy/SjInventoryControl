@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../public/css/app.css'
-import RegisterDefaultForm from './registerDefaultForm.tsx';
+import RegisterDefaultForm from './RegisterDefaultForm.tsx';
 
 const RegisterClientForm = () => {
     const registerForm = (

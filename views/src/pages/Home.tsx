@@ -8,16 +8,16 @@ import NavBar from '../components/Navbar.tsx';
 import Footer from '../components/Footer.tsx';
 import ProductTableGenerator from '../components/ProductTableGenerator.tsx';
 import ClientTableGenerator from '../components/ClientTableGenerator.tsx';
-import UserModal from '../components/UserModal.tsx';
-import RegisterProductForm from '../components/registerProductForm.tsx';
-import RegisterClientForm from '../components/registerClientForm.tsx';
-import SjLogo from '../public/img/public/SJLogo.png';
+import RegisterProductForm from '../components/RegisterProductForm.tsx';
+import RegisterClientForm from '../components/RegisterClientForm.tsx';
 import products from '../components/test/data-mocks/products.data.mock.ts'
 import clients from '../components/test/data-mocks/clients.data.mock.ts'
+import StoreStatistics from '../components/StoreStatistics.tsx';
+import SjLogo from '../public/img/public/SJLogo.png';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [selectedItem, setSelectedItem] = useState("");  
+  const [selectedItem, setSelectedItem] = useState("home");  
 
   const home = () => {
     navigate('/');
@@ -29,7 +29,7 @@ const HomePage = () => {
       <div className="main">
         <NavBar/>
         <main className="content">
-          {/* conteudo */}
+          {selectedItem === "home" && <StoreStatistics />}
           {selectedItem === "list-products-item" && <ProductTableGenerator data={products} />}
           {selectedItem === "list-clients-item" && <ClientTableGenerator data={clients} />}
           {selectedItem === "register-products-item" && <RegisterProductForm />}
@@ -41,7 +41,6 @@ const HomePage = () => {
   );
   // Produtos mais vendidos no mes
   // Top Clientes que mais compram
-  // Top fornecedor
   // Produtos com Estoque abaixo do mínimo
 
 };

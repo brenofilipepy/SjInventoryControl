@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './pages/Login.tsx';
 import SignUpPage from './pages/Signup.tsx';
 import HomePage from './pages/Home.tsx'
-import RegisterProductForm from './components/registerProductForm.tsx';
+import RegisterProductForm from './components/RegisterProductForm.tsx';
 
 ReactDOM.render(
   <React.StrictMode>

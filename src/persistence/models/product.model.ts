@@ -11,21 +11,23 @@ ProductModel.init({
     },
     name: {
         type: DataTypes.STRING,
-    },
-    code: {
-        type: DataTypes.STRING
+        allowNull: false,
     },
     category: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     quantity: {
-        type: DataTypes.NUMBER
+        type: DataTypes.NUMBER,
+        allowNull: false,
     },
     price: {
-        type: DataTypes.FLOAT
+        type: DataTypes.FLOAT,
+        allowNull: false,
     },
     cost: {
-        type: DataTypes.FLOAT
+        type: DataTypes.FLOAT,
+        allowNull: false,
     },
     addDate: {
         type: DataTypes.DATE
@@ -34,13 +36,42 @@ ProductModel.init({
         type: DataTypes.DATE
     },
     supplier: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     description: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     measure: {
         type: DataTypes.STRING
+    },
+    eanCode: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            max: 11
+        }
+    },
+    skuCode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    weight: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    orderDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    sendDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    deliverydate: {
+        type: DataTypes.DATE,
+        allowNull: false,
     }
 }, 
 {

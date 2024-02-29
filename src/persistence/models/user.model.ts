@@ -11,10 +11,11 @@ UserModel.init({
   },
   name: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   password: {
     type: DataTypes.STRING,
@@ -22,21 +23,27 @@ UserModel.init({
   },
   role: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
   permissions: {
     type: DataTypes.STRING, // TODO: Ideally permissions should be a domain table
+    allowNull: false,
   },
   addDate: {
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull: false,
   },
   updateDate: {
-    type: DataTypes.DATE
+    type: DataTypes.DATE,
+    allowNull: true,
   },
   status: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false,
   },
   activityLog: {
-    type: DataTypes.STRING // TODO: Ideally activityLog should be an array
+    type: DataTypes.STRING, // TODO: Ideally activityLog should be an array
+    allowNull: false,
   }
 },
 {

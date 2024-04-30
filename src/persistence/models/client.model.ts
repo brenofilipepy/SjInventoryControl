@@ -1,5 +1,6 @@
 import { DataTypes, Model } from 'sequelize';
-import sqliteConnection from '../../database/databaseConnection.ts';
+import Sequelize from 'sequelize';
+import sqliteConnection from '../../database/db';
 
 class ClientModel extends Model {};
 
@@ -55,8 +56,8 @@ ClientModel.init({
 },
 {
     sequelize: sqliteConnection,
-    modelName: 'Client',
-    tableName: 'Client',
+    modelName: 'User',
+    tableName: 'user',
 });
 
-export default ClientModel;
+module.exports = ClientModel;

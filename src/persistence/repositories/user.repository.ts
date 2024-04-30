@@ -1,9 +1,27 @@
 import IRepository from "./iRepository";
 import UserModel from "../models/user.model";
+import { registerUserFullTypeGuard, UserDTO } from "../dtos/user.dto";
 
 class UserRepository implements IRepository {
     public async create(userData: any | string): Promise<any> {
-        return await UserModel.create({userData});
+
+        if (registerUserFullTypeGuard) {
+            let user: UserDTO = userData;
+            return await UserModel.create({
+                name: user.name,
+                email: user.email,
+                password: user.password,
+                role: user.role,
+                permissions: user.permissions,
+                addDate: user.addDate,
+                updateDate: user.updateDate,
+                status: user.status,
+                activityLog: user.activityLog
+            });
+        } 
+        else {
+            console.error('ERROR: Could not parse sent json into user DTO');
+        }
     }
 
     public async getAll(): Promise<any | null> {

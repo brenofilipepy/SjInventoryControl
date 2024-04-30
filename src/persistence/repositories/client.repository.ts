@@ -1,6 +1,6 @@
 import IRepository from "./iRepository";
 import ClientModel from "../models/client.model";
-import { syncModels } from "../../database/databaseConnection";
+import { syncModels } from "../../database/db";
 
 class ClientRepository implements IRepository {
     public async create(clientData: any | string): Promise<any> {

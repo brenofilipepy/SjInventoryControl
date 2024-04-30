@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sqliteConnection from '../../database/databaseConnection.ts';
+import sqliteConnection from '../../database/db.ts';
 
 class ProductModel extends Model {};
 
@@ -77,7 +77,7 @@ ProductModel.init({
 {
     sequelize: sqliteConnection,
     modelName: 'Product',
-    tableName: 'Product',
+    tableName: 'product',
 });
   
 export default ProductModel;

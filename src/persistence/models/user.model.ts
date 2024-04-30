@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sqliteConnection from '../../database/databaseConnection.ts';
+import sqliteConnection from '../../database/db.ts';
 
 class UserModel extends Model {};
 
@@ -48,8 +48,8 @@ UserModel.init({
 },
 {
   sequelize: sqliteConnection,
-  modelName: 'Product',
-  tableName: 'Product'
+  modelName: 'User',
+  tableName: 'user'
 });
 
 export default UserModel;

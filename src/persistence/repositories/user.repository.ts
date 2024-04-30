@@ -4,7 +4,6 @@ import { registerUserFullTypeGuard, UserDTO } from "../dtos/user.dto";
 
 class UserRepository implements IRepository {
     public async create(userData: any | string): Promise<any> {
-
         if (registerUserFullTypeGuard) {
             let user: UserDTO = userData;
             return await UserModel.create({

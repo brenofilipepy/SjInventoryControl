@@ -9,6 +9,9 @@ const app: Express = express();
 const port = 4000;
 const logger = Logger.getLogger();
 
+/**
+ * TODO: Check the possibility to split this API into multiple services
+ */
 app.use(express.json());
 
 (async () => {
@@ -21,12 +24,36 @@ app.use(express.json());
 })();
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello World with TypeScript and Express!');
+  res.send('There are no easter eggs up here go away!');
 });
 
-app.post('/registerUser', (req: Request, res: Response) => {
+app.post('/user', async (req: Request, res: Response) => {
   const user = new User();
-  const response: IHttpResponse = user.create(req.body);
+  const response: IHttpResponse = await user.create(req.body);
+  res.status(response.status).json(response);
+})
+
+app.get('/user', async (req: Request, res: Response) => {
+  const user = new User();
+  const response: IHttpResponse = await user.getAll();
+  res.status(response.status).json(response);
+})
+
+app.get('/user/:id', async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const user = new User();
+  const response: IHttpResponse = await user.getById(id);
+  res.status(response.status).json(response);
+})
+
+app.patch('/user', (req: Request, res: Response) => {
+
+})
+
+app.delete('/user/:id', async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const user = new User();
+  const response: IHttpResponse = await user.delete(id);
   res.status(response.status).json(response);
 })
 

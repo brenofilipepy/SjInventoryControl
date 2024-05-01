@@ -4,6 +4,7 @@ import { registerUserFullTypeGuard, UserDTO } from "../dtos/user.dto";
 import { IErrorResponse } from "../../interfaces/IErrorResponse";
 
 class UserRepository implements IRepository {
+    private returnExcludedFields = ['password', 'addDate', 'updateDate', 'activityLog', 'createdAt', 'updatedAt'];
     // TODO: update return type
     public async create(userData: any | string): Promise<Object> {
         let user: UserDTO = userData;
@@ -21,11 +22,15 @@ class UserRepository implements IRepository {
     }
 
     public async getAll(): Promise<any | null> {
-        return await UserModel.findAll();
+        return await UserModel.findAll({
+            attributes: { exclude: this.returnExcludedFields }
+        });
     }
 
     public async getById(userId: number): Promise<any | null> {
-        return await UserModel.findByPk(userId);
+        return await UserModel.findByPk(userId, {
+            attributes: { exclude: this.returnExcludedFields }
+        });
     }
 
     public async update(userId: number, userData: any | string): Promise<any | null> {

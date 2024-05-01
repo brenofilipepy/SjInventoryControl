@@ -1,8 +1,7 @@
-import { registerUserTypeGuard } from "../../persistence/dtos/user.dto";
 import UserRepository from "../../persistence/repositories/user.repository.ts";
 import Logger from '../logger.ts';
 import IHttpResponse from "../../interfaces/IHttpResponse.ts";
-import { UserDTO } from "../../persistence/dtos/user.dto";
+import { registerUserTypeGuard, UserDTO } from "../../persistence/dtos/user.dto";
 import { IErrorResponse, isIErrorResponse } from "../../interfaces/IErrorResponse.ts";
 
 class User {
@@ -10,11 +9,11 @@ class User {
     private logger = Logger.getLogger();
 
     async create(userJson: JSON): Promise<IHttpResponse> {
-        let responseMsg: IHttpResponse;
         if (registerUserTypeGuard(userJson)) {
             this.logger.info("Sent json is valid");
+
             try {
-                const response = await this.userRepository.create({
+                await this.userRepository.create({
                     name: userJson.name,
                     email: userJson.email,
                     password: userJson.password,
@@ -26,46 +25,18 @@ class User {
                     activityLog: [`${this.logger.timeStamp()} - User Created`].toString()
                 });
 
-                if (isIErrorResponse(response)) {
-                    responseMsg =  {
-                        message: `${response.type} - ${response.message} (${response.value})`,
-                        date: new Date(),
-                        status: 400
-                    }
-                }
-                else {
-                    responseMsg = {
-                        message: 'User Created Successfully!',
-                        date: new Date(),
-                        status: 201
-                    };
-                    
-                }
-                this.logger.info(responseMsg);
-                return responseMsg;
-
-
+                return {
+                    message: `User created successfully`,
+                    date: new Date(),
+                    status: 200
+                };
             } catch (error) {
-                let response: IHttpResponse;
-                if (error.name === 'SequelizeUniqueConstraintError') {
-                    response = {
-                        message: `Error user already exists\n ERROR: ${error}`,
-                        date: new Date(),
-                        status: 500
-                    };
-                }
-                else {
-                    response = {
-                        message: `Error while creating user\n ERROR: ${error}`,
-                        date: new Date(),
-                        status: 500
-                    };
-                }
-
-                this.logger.error(response);
-                return response;
+                return {
+                    message: `${error.errors[0].type} - ${error.errors[0].message} (${error.errors[0].value})`,
+                    date: new Date(),
+                    status: 500
+                };
             }
-
         } else {
             const response: IHttpResponse = {
                 message: 'Sent json is not valid',

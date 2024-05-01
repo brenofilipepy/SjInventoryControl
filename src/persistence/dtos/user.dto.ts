@@ -14,11 +14,11 @@ interface UserDTO {
 }
 
 function registerUserTypeGuard(obj: any): obj is UserDTO {
-    return (
-        "name" in obj &&
-        "email" in obj &&
-        "password" in obj
-    );
+    const isNameString = typeof obj.name === 'string';
+    const isEmailString = typeof obj.email === 'string';
+    const isPasswordString = typeof obj.password === 'string';
+
+    return isNameString && isEmailString && isPasswordString;
 }
 
 function registerUserFullTypeGuard(obj: any): obj is UserDTO {

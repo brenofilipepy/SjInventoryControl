@@ -60,7 +60,7 @@ class User {
         try {
             const users = JSON.stringify(await this.userRepository.getAll());
             const response: IHttpResponse = {
-                message: users,
+                message: JSON.parse(users),
                 date: new Date(),
                 status: 200
             };
@@ -83,7 +83,7 @@ class User {
         try {
             const user = JSON.stringify(await this.userRepository.getById(userId));
             const response: IHttpResponse = {
-                message: user,
+                message: JSON.parse(user),
                 date: new Date(),
                 status: 200
             };

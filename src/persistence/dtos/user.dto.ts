@@ -27,7 +27,12 @@ function registerUserTypeGuard(obj: any): obj is UserDTO {
     const isEmailString = typeof obj.email === 'string';
     const isPasswordString = typeof obj.password === 'string';
 
-    return isNameString && isEmailString && isPasswordString;
+    if (isNameString && isEmailString && isPasswordString) {
+        return true;
+    }
+    else {
+        throw new Error('Sent json is not valid');
+    }
 }
 
 function registerUserFullTypeGuard(obj: any): obj is UserDTO {

@@ -9,10 +9,9 @@ class User {
     private logger = Logger.getLogger();
 
     async create(userJson: JSON): Promise<IHttpResponse> {
-        if (registerUserTypeGuard(userJson)) {
-            this.logger.info("Sent json is valid");
-
-            try {
+        try {
+            if (registerUserTypeGuard(userJson)) {
+                this.logger.info("Sent json is valid");
                 await this.userRepository.create({
                     name: userJson.name,
                     email: userJson.email,
@@ -30,24 +29,24 @@ class User {
                     date: new Date(),
                     status: 200
                 };
-            } catch (error) {
+            }
+        } catch (error) {
+            if (error.name === "SequelizeDatabaseError") {
                 return {
                     message: `${error.errors[0].type} - ${error.errors[0].message} (${error.errors[0].value})`,
                     date: new Date(),
                     status: 500
                 };
             }
-        } else {
-            const response: IHttpResponse = {
-                message: 'Sent json is not valid',
-                date: new Date(),
-                status: 400
-            };
-
-            this.logger.error(response);
-
-            return response;
+            else {
+                return {
+                    message: error.message,
+                    date: new Date(),
+                    status: 500
+                };
+            }
         }
+
     };
 
     async getAll(): Promise<IHttpResponse> {

@@ -46,8 +46,11 @@ app.get('/user/:id', async (req: Request, res: Response) => {
   res.status(response.status).json(response);
 })
 
-app.patch('/user', (req: Request, res: Response) => {
-
+app.patch('/user/:id', async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const user = new User();
+  const response: IHttpResponse = await user.update(id, req.body);
+  res.status(response.status).json(response);
 })
 
 app.delete('/user/:id', async (req: Request, res: Response) => {

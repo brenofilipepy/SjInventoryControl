@@ -1,7 +1,7 @@
 import UserRepository from "../../persistence/repositories/user.repository.ts";
 import Logger from '../logger.ts';
 import IHttpResponse from "../../interfaces/IHttpResponse.ts";
-import { registerUserTypeGuard, UserDTO } from "../../persistence/dtos/user.dto";
+import { registerUserTypeGuard, checkIfObjHasLegalKeys, checkIfLegalKeysAreCorrectType } from "../../persistence/dtos/user.dto";
 import { IErrorResponse, isIErrorResponse } from "../../interfaces/IErrorResponse.ts";
 
 class User {
@@ -18,7 +18,7 @@ class User {
                     email: userJson.email,
                     password: userJson.password,
                     role: "seller",
-                    permissions: ["createProduct", "readProduct", "createClient", "readClient"].toString(),
+                    permissions: "['createProduct', 'readProduct', 'createClient', 'readClient']",
                     addDate: `${this.logger.timeStamp()}`,
                     updateDate: "null",
                     status: "active",
@@ -92,6 +92,30 @@ class User {
             };
 
             this.logger.info(response);
+            return response;
+        }
+    }
+
+    async update(userId: number, userJson: JSON): Promise<IHttpResponse> {
+        try {
+            if (checkIfObjHasLegalKeys(userJson)) {
+                if (checkIfLegalKeysAreCorrectType(userJson)) {
+                    this.userRepository.update(userId, userJson);
+                    return {
+                        message: 'User updated',
+                        date: new Date(),
+                        status: 200
+                    }
+                }
+            }
+        } catch (error) {
+            const response: IHttpResponse = {
+                message: error.message,
+                date: new Date(),
+                status: 400
+            };
+
+            this.logger.error(response);
             return response;
         }
     }

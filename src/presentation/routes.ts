@@ -1,10 +1,9 @@
 import express, { Express, Request, Response } from "express";
 import User from "../business/controllers/user";
+import Product from "../business/controllers/product.ts";
 import Logger from "../business/logger.ts";
 import database from "../database/db.ts";
 import IHttpResponse from "../interfaces/IHttpResponse.ts";
-
-
 
 /**
  * TODO: Check the possibility to split this API into multiple services
@@ -13,6 +12,8 @@ import IHttpResponse from "../interfaces/IHttpResponse.ts";
 class SjApi {
   private app: Express;
   private logger = Logger.getLogger();
+  private user = new User();
+  private product = new Product();
 
   constructor() {
     this.app = express();
@@ -34,42 +35,44 @@ class SjApi {
 
   private setupRoutes(): void {
     this.app.get('/', (req: Request, res: Response) => {
-      res.send('There are no easter eggs up here go away!');
+      res.status(418).send('There are no easter eggs up here go away!');
     });
     
     // NOTE: USER ENDPOINTS
     this.app.post('/user', async (req: Request, res: Response) => {
-      const user = new User();
-      const response: IHttpResponse = await user.create(req.body);
+      const response: IHttpResponse = await this.user.create(req.body);
       res.status(response.status).json(response);
     })
     
     this.app.get('/user', async (req: Request, res: Response) => {
-      const user = new User();
-      const response: IHttpResponse = await user.getAll();
+      const response: IHttpResponse = await this.user.getAll();
       res.status(response.status).json(response);
     })
     
     this.app.get('/user/:id', async (req: Request, res: Response) => {
       const id = parseInt(req.params.id);
-      const user = new User();
-      const response: IHttpResponse = await user.getById(id);
+      const response: IHttpResponse = await this.user.getById(id);
       res.status(response.status).json(response);
     })
     
     this.app.patch('/user/:id', async (req: Request, res: Response) => {
       const id = parseInt(req.params.id);
-      const user = new User();
-      const response: IHttpResponse = await user.update(id, req.body);
+      const response: IHttpResponse = await this.user.update(id, req.body);
       res.status(response.status).json(response);
     })
     
     this.app.delete('/user/:id', async (req: Request, res: Response) => {
       const id = parseInt(req.params.id);
-      const user = new User();
-      const response: IHttpResponse = await user.delete(id);
+      const response: IHttpResponse = await this.user.delete(id);
       res.status(response.status).json(response);
     })
+
+    // NOTE: PRODUCT ENDPOINTS
+    this.app.post('/product', async (req: Request, res: Response) => {
+      const response: IHttpResponse = await this.product.create(req.body);
+      res.status(response.status).json(response);
+    })
+
   }
 
   public start(port: number): void {

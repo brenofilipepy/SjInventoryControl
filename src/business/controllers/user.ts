@@ -2,7 +2,6 @@ import UserRepository from "../../persistence/repositories/user.repository.ts";
 import Logger from '../logger.ts';
 import IHttpResponse from "../../interfaces/IHttpResponse.ts";
 import { registerUserTypeGuard, checkIfObjHasLegalKeys, checkIfLegalKeysAreCorrectType } from "../../persistence/dtos/user.dto";
-import { IErrorResponse, isIErrorResponse } from "../../interfaces/IErrorResponse.ts";
 
 class User {
     private userRepository: UserRepository = new UserRepository();
@@ -95,6 +94,9 @@ class User {
         }
     }
 
+    /**
+     * TODO: Update `updateDate` field
+     */
     async update(userId: number, userJson: JSON): Promise<IHttpResponse> {
         try {
             if (checkIfObjHasLegalKeys(userJson)) {

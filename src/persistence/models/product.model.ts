@@ -17,10 +17,6 @@ ProductModel.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-    quantity: {
-        type: DataTypes.NUMBER,
-        allowNull: false,
-    },
     price: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -65,12 +61,12 @@ ProductModel.init({
         type: DataTypes.DATE,
         allowNull: false,
     },
-    sendDate: {
+    deliverydate: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    deliverydate: {
-        type: DataTypes.DATE,
+    status: {
+        type: DataTypes.STRING,
         allowNull: false,
     }
 }, 

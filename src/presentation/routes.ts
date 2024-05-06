@@ -73,6 +73,11 @@ class SjApi {
       res.status(response.status).json(response);
     })
 
+    this.app.get('/product', async (req: Request, res: Response) => {
+      const response: IHttpResponse = await this.product.getAll();
+      res.status(response.status).json(response);
+    })
+
   }
 
   public start(port: number): void {

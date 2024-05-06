@@ -16,7 +16,7 @@ class Product {
                         category: product.category,
                         price: product.price,
                         cost: product.cost,
-                        addDate: new Date(),
+                        addDate: new Date().toString(),
                         updateDate: null,
                         supplier: product.supplier,
                         description: product.description,
@@ -56,7 +56,28 @@ class Product {
 
     }
 
-    // async getAll(): Promise<IHttpResponse> {}
+    async getAll(): Promise<IHttpResponse> {
+        try {
+            const products = JSON.stringify(await this.productRepository.getAll());
+            const response: IHttpResponse = {
+                message: JSON.parse(products),
+                date: new Date(),
+                status: 200
+            };
+            this.logger.info(response);
+            return response;
+        }
+        catch (error) {
+            const response: IHttpResponse = {
+                message: `Could not get products data\n ERROR: ${error}`,
+                date: new Date(),
+                status: 500
+            };
+
+            this.logger.error(response);
+            return response;
+        }
+    }
 
     // async getById(productId: number): Promise<IHttpResponse> {}
 

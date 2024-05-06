@@ -8,7 +8,7 @@
     "test": "jest",
     "pkg-solution-dev": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\dev\\LocalWebAppDev --debug",
     "pkg-solution-prod": "pkg .\\app.js --config package.json --target node14-win-x64 --output .\\dist\\prod\\LocalWebApp",
-    "start-express-server": "nodemon src\\presentation\\routes.ts",
+    "start-express-server": "nodemon src\\presentation\\main.ts",
     "start-react-server": "cd views && npm start",
     "test-db-conn": "npx ts-node src\\database\\databaseConnection.ts"
   },

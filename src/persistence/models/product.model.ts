@@ -45,9 +45,6 @@ ProductModel.init({
     eanCode: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            max: 11
-        }
     },
     skuCode: {
         type: DataTypes.STRING,
@@ -61,7 +58,7 @@ ProductModel.init({
         type: DataTypes.DATE,
         allowNull: false,
     },
-    deliverydate: {
+    deliveryDate: {
         type: DataTypes.DATE,
         allowNull: false,
     },

@@ -138,6 +138,7 @@ class User {
                 date: new Date(),
                 status: 500
             }
+            
             this.logger.error(response);
             return response;
         }

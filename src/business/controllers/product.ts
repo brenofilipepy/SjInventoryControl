@@ -1,7 +1,7 @@
 import ProductRepository from "../../persistence/repositories/product.repository";
 import Logger from "../logger";
 import IHttpResponse from "../../interfaces/IHttpResponse";
-import { productTypeGuard } from "../../persistence/dtos/product.dto";
+import { productTypeGuard, checkIfObjHasLegalKeys, checkIfLegalKeysAreCorrectType } from "../../persistence/dtos/product.dto";
 
 class Product {
     private productRepository: ProductRepository = new ProductRepository();
@@ -79,12 +79,75 @@ class Product {
         }
     }
 
-    // async getById(productId: number): Promise<IHttpResponse> {}
+    async getById(productId: number): Promise<IHttpResponse> {
+        try {
+            const product = JSON.stringify(await this.productRepository.getById(productId));
+            const response: IHttpResponse = {
+                message: JSON.parse(product),
+                date: new Date(),
+                status: 200
+            };
 
-    // async update(productId: number, product: JSON): Promise<IHttpResponse> {}
+            this.logger.info(response);
+            return response;
+        } catch (error) {
+            const response: IHttpResponse = {
+                message: `Could not get product ${productId}`,
+                date: new Date(),
+                status: 500
+            };
 
-    // logical deletion only ('selled' value on 'status' field)
-    // async delete(productId: number): Promise<IHttpResponse> {}
+            this.logger.info(response);
+            return response;
+        }
+    }
+
+    async update(productId: number, product: JSON): Promise<IHttpResponse> {
+        try {
+            if (checkIfObjHasLegalKeys(productId)) {
+                if (checkIfLegalKeysAreCorrectType(productId)) {
+                    this.productRepository.update(productId, product);
+                    return {
+                        message: 'Product updated',
+                        date: new Date(),
+                        status: 200
+                    }                        
+                }
+            }
+        } catch (error) {
+            const response: IHttpResponse = {
+                message: error.message,
+                date: new Date(),
+                status: 400
+            };
+
+            this.logger.error(response);
+            return response;
+        }
+    }
+
+    async delete(productId: number): Promise<IHttpResponse> {
+        try {
+            JSON.stringify(await this.productRepository.delete(productId));
+            const response: IHttpResponse = {
+                message: `Product ${productId} sold successfully`,
+                date: new Date(),
+                status: 200
+            };
+
+            this.logger.info(response);
+            return response;
+        } catch (error) {
+            const response: IHttpResponse = {
+                message: `could not delete product ${productId}`,
+                date: new Date(),
+                status: 500
+            }
+
+            this.logger.error(response);
+            return response;
+        }
+    }
 }
 
 export default Product;

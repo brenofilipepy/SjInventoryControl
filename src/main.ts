@@ -1,7 +1,7 @@
-import UserApi from "./userApi";
-import ProductApi from "./productApi";
-import database from "../database/db.ts";
-import Logger from "../business/logger.ts";
+import UserApi from "./presentation/userApi.ts";
+import ProductApi from "./presentation/productApi.ts";
+import database from "./database/db.ts";
+import Logger from "./business/logger.ts";
 
 const logger = Logger.getLogger();
 

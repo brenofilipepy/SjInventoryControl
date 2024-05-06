@@ -53,4 +53,52 @@ function productTypeGuard(obj: any): obj is ProductDTO {
     }
 }
 
-export { ProductDTO, productTypeGuard }
+const legalKeys: { [key: string]: string } = {
+    "name": "string",
+    "category": "string",
+    "price": "string",
+    "cost": "number",
+    "supplier": "string",
+    "description": "string",
+    "measure": "string",
+    "eanCode": "number",
+    "skuCode": "string",
+    "weight": "string",
+    "orderDate": "string",
+    "deliveryDate": "string"
+};
+
+function checkIfObjHasLegalKeys(obj: any): boolean {
+    const objectKeys = Object.keys(obj);
+    objectKeys.forEach((key) => {
+        if (!(key in legalKeys)) {
+            throw new Error(`${key} is not valid for product`);
+        }
+    });
+
+    return true;
+}
+
+function getKeyByValue(object: { [key: string]: any }, value: any): string | undefined {
+    for (let prop in object) {
+        if (object.hasOwnProperty(prop)) {
+            if (object[prop] === value)
+                return prop;
+        }
+    }
+    return undefined;
+}
+
+function checkIfLegalKeysAreCorrectType(obj: any): boolean {
+    const objKeys = Object.keys(obj);
+
+    objKeys.forEach((key) => {
+        if (typeof obj[key] != legalKeys[key]) {
+            throw new Error(`Error, ${getKeyByValue(obj, obj[key])} is not ${legalKeys[key]}`);
+        }
+    })
+
+    return true;
+}
+
+export { ProductDTO, productTypeGuard, checkIfObjHasLegalKeys, checkIfLegalKeysAreCorrectType }

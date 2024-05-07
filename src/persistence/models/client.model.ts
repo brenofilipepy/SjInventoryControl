@@ -51,8 +51,8 @@ ClientModel.init({
 },
 {
     sequelize: sqliteConnection,
-    modelName: 'User',
-    tableName: 'user',
+    modelName: 'Client',
+    tableName: 'client',
 });
 
 export default ClientModel;

@@ -1,5 +1,6 @@
-import UserApi from "./presentation/userApi.ts";
-import ProductApi from "./presentation/productApi.ts";
+import UserApi from "./presentation/user.api.ts";
+import ProductApi from "./presentation/product.api.ts";
+import ClientApi from "./presentation/client.api.ts";
 import database from "./database/db.ts";
 import Logger from "./business/logger.ts";
 
@@ -19,11 +20,13 @@ function syncDatabase() {
 
 function main() {
     syncDatabase();
-    const userApi = new UserApi;
-    const productApi = new ProductApi;
+    const userApi = new UserApi();
+    const productApi = new ProductApi();
+    const clientApi = new ClientApi();
 
     userApi.start(4000);
     productApi.start(4001);
+    clientApi.start(4002);
 }
 
 main();

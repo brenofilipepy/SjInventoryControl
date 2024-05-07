@@ -1,30 +1,31 @@
-import UserRepository from "../../persistence/repositories/user.repository.ts";
-import Logger from '../logger.ts';
-import IHttpResponse from "../../interfaces/IHttpResponse.ts";
-import { registerUserTypeGuard, checkIfObjHasLegalKeys, checkIfLegalKeysAreCorrectType } from "../../persistence/dtos/user.dto";
+import ClientRepository from "../../persistence/repositories/client.repository";
+import Logger from "../logger";
+import IHttpResponse from "../../interfaces/IHttpResponse";
+import { ClientDTO, clientTypeGuard, checkIfObjHasLegalKeys, checkIfLegalKeysAreCorrectType } from "../../persistence/dtos/client.dto";
 
-class User {
-    private userRepository: UserRepository = new UserRepository();
+class Client {
+    private clientRepository: ClientRepository = new ClientRepository();
     private logger = Logger.getLogger();
 
-    async create(userJson: JSON): Promise<IHttpResponse> {
+    async create(clientJson: JSON): Promise<IHttpResponse> {
         try {
-            if (registerUserTypeGuard(userJson)) {
+            if (clientTypeGuard(clientJson)) {
                 this.logger.info("Sent json is valid");
-                await this.userRepository.create({
-                    name: userJson.name,
-                    email: userJson.email,
-                    password: userJson.password,
-                    role: "seller",
-                    permissions: "['createProduct', 'readProduct', 'createClient', 'readClient']",
+                await this.clientRepository.create({
+                    name: clientJson.name,
+                    type: clientJson.type,
+                    cpfCnpj: clientJson.cpfCnpj,
+                    address: clientJson.address,
+                    email: clientJson.email,
+                    phone: clientJson.phone,
                     addDate: `${this.logger.timeStamp()}`,
                     updateDate: "null",
                     status: "active",
-                    activityLog: [`${this.logger.timeStamp()} - User Created`].toString()
+                    activityLog: [`${this.logger.timeStamp()} - Client Created`].toString()
                 });
 
                 return {
-                    message: `User created successfully`,
+                    message: `Client created successfully`,
                     date: new Date(),
                     status: 200
                 };
@@ -45,14 +46,13 @@ class User {
                 };
             }
         }
-
     };
 
     async getAll(): Promise<IHttpResponse> {
         try {
-            const users = JSON.stringify(await this.userRepository.getAll());
+            const clients = JSON.stringify(await this.clientRepository.getAll());
             const response: IHttpResponse = {
-                message: JSON.parse(users),
+                message: JSON.parse(clients),
                 date: new Date(),
                 status: 200
             };
@@ -61,7 +61,7 @@ class User {
             return response;
         } catch (error) {
             const response: IHttpResponse = {
-                message: `Could not get users data\n ERROR: ${error}`,
+                message: `Could not get clients data\n ERROR: ${error}`,
                 date: new Date(),
                 status: 500
             };
@@ -69,13 +69,13 @@ class User {
             this.logger.error(response);
             return response;
         }
-    }
+    };
 
-    async getById(userId: number): Promise<IHttpResponse> {
+    async getById(clientId: number): Promise<IHttpResponse> {
         try {
-            const user = JSON.stringify(await this.userRepository.getById(userId));
+            const client = JSON.stringify(await this.clientRepository.getById(clientId));
             const response: IHttpResponse = {
-                message: JSON.parse(user),
+                message: JSON.parse(client),
                 date: new Date(),
                 status: 200
             };
@@ -84,7 +84,7 @@ class User {
             return response;
         } catch (error) {
             const response: IHttpResponse = {
-                message: `Could not get user ${userId}`,
+                message: `Could not get client ${clientId}`,
                 date: new Date(),
                 status: 500
             };
@@ -92,18 +92,16 @@ class User {
             this.logger.info(response);
             return response;
         }
-    }
+    };
 
-    /**
-     * TODO: Update `updateDate` field
-     */
-    async update(userId: number, userJson: JSON): Promise<IHttpResponse> {
+    // TODO: NOT WORKING
+    async update(clientId: number, clientJson: JSON): Promise<IHttpResponse> {
         try {
-            if (checkIfObjHasLegalKeys(userJson)) {
-                if (checkIfLegalKeysAreCorrectType(userJson)) {
-                    this.userRepository.update(userId, userJson);
+            if (checkIfObjHasLegalKeys(clientJson)) {
+                if (checkIfLegalKeysAreCorrectType(clientJson)) {
+                    this.clientRepository.update(clientId, clientJson);
                     return {
-                        message: 'User updated',
+                        message: 'Client updated',
                         date: new Date(),
                         status: 200
                     }
@@ -119,32 +117,30 @@ class User {
             this.logger.error(response);
             return response;
         }
-    }
+    };
 
-    async delete(userId: number): Promise<IHttpResponse> {
+    async delete(clientId: number): Promise<IHttpResponse> {
         try {
-            const user = JSON.stringify(await this.userRepository.delete(userId));
+            JSON.stringify(await this.clientRepository.delete(clientId));
             const response: IHttpResponse = {
-                message: `User ${userId} deleted successfully`,
+                message: `Client ${clientId} deleted`,
                 date: new Date(),
-                status: 200,
-            };
+                status: 500
+            }
 
             this.logger.info(response);
             return response;
         } catch (error) {
             const response: IHttpResponse = {
-                message: `Could not delete user ${userId}`,
+                message: `Could not delete client ${clientId}`,
                 date: new Date(),
                 status: 500
             }
-            
+
             this.logger.error(response);
             return response;
         }
-    }
-
-
+    };
 }
 
-export default User;
+export default Client;

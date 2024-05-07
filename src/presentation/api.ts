@@ -1,12 +1,13 @@
 import express, { Express, Request, Response } from "express";
 import Logger from "../business/logger";
-import User from "../business/controllers/user";
-import Product from "../business/controllers/product";
+import User from "../business/controllers/user.controller";
+import Product from "../business/controllers/product.controller";
+import Client from "../business/controllers/client.controller";
 
 abstract class Api {
     protected app: Express;
     protected logger = Logger.getLogger();
-    protected abstract controller: User | Product;
+    protected abstract controller: User | Product | Client;
 
     constructor() {
         this.app = express();

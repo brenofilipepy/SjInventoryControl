@@ -48,7 +48,7 @@ class ProductRepository implements IRepository {
                     { status: { [Op.not]: 'sold' } }
                 ]
             }
-        })
+        });
 
         return product == null ? 'Product has already been sold' : product;
     }

@@ -1,5 +1,4 @@
 import { DataTypes, Model } from 'sequelize';
-import Sequelize from 'sequelize';
 import sqliteConnection from '../../database/db';
 
 class ClientModel extends Model {};
@@ -17,11 +16,7 @@ ClientModel.init({
     type: {
         type: DataTypes.STRING,
     },
-    cpf: {
-        type: DataTypes.STRING,
-        allowNull: true,
-    },
-    cnpj: {
+    cpfCnpj: {
         type: DataTypes.STRING,
         allowNull: true,
     },
@@ -60,4 +55,4 @@ ClientModel.init({
     tableName: 'user',
 });
 
-module.exports = ClientModel;
+export default ClientModel;

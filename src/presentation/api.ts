@@ -3,6 +3,7 @@ import Logger from "../business/logger";
 import User from "../business/controllers/user.controller";
 import Product from "../business/controllers/product.controller";
 import Client from "../business/controllers/client.controller";
+const cors = require('cors');
 
 abstract class Api {
     protected app: Express;
@@ -12,6 +13,7 @@ abstract class Api {
     constructor() {
         this.app = express();
         this.app.use(express.json());
+        this.app.use(cors());
         this.setupRoutes();
     }
 

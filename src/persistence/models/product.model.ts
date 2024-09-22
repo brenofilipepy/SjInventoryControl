@@ -1,5 +1,5 @@
 import { DataTypes, Model } from 'sequelize';
-import sqliteConnection from '../../database/databaseConnection.ts';
+import sqliteConnection from '../../database/db.ts';
 
 class ProductModel extends Model {};
 
@@ -15,10 +15,6 @@ ProductModel.init({
     },
     category: {
         type: DataTypes.STRING,
-        allowNull: false,
-    },
-    quantity: {
-        type: DataTypes.NUMBER,
         allowNull: false,
     },
     price: {
@@ -49,9 +45,6 @@ ProductModel.init({
     eanCode: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            max: 11
-        }
     },
     skuCode: {
         type: DataTypes.STRING,
@@ -65,19 +58,19 @@ ProductModel.init({
         type: DataTypes.DATE,
         allowNull: false,
     },
-    sendDate: {
+    deliveryDate: {
         type: DataTypes.DATE,
         allowNull: false,
     },
-    deliverydate: {
-        type: DataTypes.DATE,
+    status: {
+        type: DataTypes.STRING,
         allowNull: false,
     }
 }, 
 {
     sequelize: sqliteConnection,
     modelName: 'Product',
-    tableName: 'Product',
+    tableName: 'product',
 });
   
 export default ProductModel;

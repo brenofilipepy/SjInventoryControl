@@ -1,39 +1,53 @@
 import IRepository from "./iRepository";
 import ClientModel from "../models/client.model";
-import { syncModels } from "../../database/databaseConnection";
+import { Op } from 'sequelize';
 
 class ClientRepository implements IRepository {
     public async create(clientData: any | string): Promise<any> {
-        const createOp = await ClientModel.create(clientData);
-        syncModels();
-        return createOp;
+        return await ClientModel.create(clientData);
     }
 
     public async getAll(): Promise<any> {
-        const findAllOp = await ClientModel.findAll();
-        syncModels();
-        return findAllOp;
+        const clients = await ClientModel.findAll({
+            where: {
+                [Op.or]: [
+                    { status: null },
+                    { status: { [Op.not]: 'deactivated' } }
+                ]
+            }
+        });
+
+        return clients;
     }
 
     public async getById(clientId: number): Promise<any | null> {
-        const findByPkOp = await ClientModel.findByPk(clientId);
-        syncModels();
-        return findByPkOp;
+        const client = await ClientModel.findOne({
+            where: {
+                id: clientId,
+                [Op.or]: [
+                    {status: null},
+                    {status: {[Op.not]: 'deactivated'}}
+                ]
+            }
+        });
+
+        return client == null ? 'Client is deactivated' : client;
     }
 
     public async update(clientId: number, clientData: any | string): Promise<any | null> {
         const client = await ClientModel.findByPk(clientId);
         if (client) {
             client.update(clientData);
-            syncModels();
         }
         return client;
     }
 
-    public async delete(userId: number): Promise<number> {
-        const deleteOp = await ClientModel.destroy({ where: { id: userId } });
-        syncModels();
-        return deleteOp;
+    public async delete(clientId: number): Promise<number> {
+        const client = await ClientModel.findByPk(clientId);
+        if (client) {
+            client.update({ 'status': 'deactivated' });
+        }
+        return clientId;
     }
 }
 
